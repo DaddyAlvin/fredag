@@ -98,16 +98,16 @@ function Subslayer() {
           inte hamnar i källkoden.
         </p>
         <pre className="filetree">{`SubSlayer/
-├─ index.html
-├─ backend/
-│  ├─ api.php, login.php, register.php, logout.php
-│  ├─ subslayer.php, salary.php, global-stats.php
-│  └─ notifier.php
-├─ frontend/
-│  ├─ css/style.css
-│  └─ js/main.js, api.js, currencies.js, render.js, salary.js
-├─ composer/
-└─ db/SubSlayer.sql`}</pre>
+            ├─ index.html
+            ├─ backend/
+            │  ├─ api.php, login.php, register.php, logout.php
+            │  ├─ subslayer.php, salary.php, global-stats.php
+            │  └─ notifier.php
+            ├─ frontend/
+            │  ├─ css/style.css
+            │  └─ js/main.js, api.js, currencies.js, render.js, salary.js
+            ├─ composer/
+            └─ db/SubSlayer.sql`}</pre>
       </section>
     </main>
   );

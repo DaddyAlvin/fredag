@@ -413,13 +413,15 @@ footer p {
     scroll-padding-top: 1rem;
   }
 
-  body {
+  #root {
     display: grid;
     grid-template-columns: var(--sidebar) minmax(0, 1fr);
     grid-template-areas:
       "header main"
       "header footer";
     grid-template-rows: 1fr auto;
+    justify-items: stretch;
+    width: 100%;
     min-height: 100vh;
   }
 
@@ -433,8 +435,15 @@ footer p {
     border-right: 1px solid var(--color-border);
   }
 
-  main { grid-area: main; }
-  footer { grid-area: footer; }
+  main {
+    grid-area: main;
+    width: 100%;
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100%;
+  }
 }
 
 /* ---------- Levande bakgrund ---------- */
@@ -600,40 +609,7 @@ main > section h2::after {
 main > section:nth-of-type(odd) { --from-x: -36px; }
 main > section:nth-of-type(even) { --from-x: 36px; }
 
-/* ---------- Desktop: trädet som fast sidomeny ---------- */
 @media (min-width: 56rem) {
-  html {
-    scroll-padding-top: 1rem;
-  }
-
-  #root {
-    display: grid;
-    grid-template-columns: var(--sidebar) minmax(0, 1fr);
-    grid-template-areas:
-      "header main"
-      "header footer";
-    grid-template-rows: 1fr auto;
-    width: 100%;
-    min-height: 100vh;
-  }
-
-  header {
-    grid-area: header;
-    align-self: start;
-    height: 100vh;
-    padding: 2rem 1.5rem;
-    overflow-y: auto;
-    border-bottom: 0;
-    border-right: 1px solid var(--color-border);
-  }
-
-  main {
-    grid-area: main;
-    width: 100%;
-  }
-
-  footer {
-    grid-area: footer;
-    width: 100%;
-  }
+  main > section:nth-of-type(odd) { margin-right: clamp(0rem, 6vw, 4rem); }
+  main > section:nth-of-type(even) { margin-left: clamp(0rem, 6vw, 4rem); }
 }
