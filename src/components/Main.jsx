@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Main() {
     return (
     <main id="home">
@@ -58,7 +60,7 @@ function Main() {
               <li>JavaScript</li>
               <li>MySQL / MariaDB</li>
             </ul>
-            <a className="btn btn-primary" href="subslayer.html">Läs om projektet</a>
+            <Link className="btn btn-primary" to="/subslayer">Läs om projektet</Link>
           </article>
         </div>
       </section>
