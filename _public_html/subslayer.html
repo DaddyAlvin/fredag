@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SubSlayer – Alvin Sandgren</title>
+    <meta name="description" content="SubSlayer: en webbapp i PHP och JavaScript för att hålla koll på prenumerationer." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script>document.documentElement.classList.add("js");</script>
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="fog fog--far" aria-hidden="true"></div>
+    <div class="fog fog--near" aria-hidden="true"></div>
+
+    <header>
+      <div class="header-bar">
+        <a class="brand" href="index.html">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2 7 9h3l-4.5 6h4L6 20h5v3h2v-3h5l-3.5-5h4L14 9h3z" />
+          </svg>
+          alvin<span>/</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Meny</button>
+      </div>
+      <p class="role">Junior developer</p>
+
+      <nav id="site-nav" class="tree-nav" aria-label="Huvudmeny">
+        <ul class="tree">
+          <li><a href="index.html#home">Hem</a></li>
+          <li><a href="index.html#about">Om mig</a></li>
+          <li><a href="index.html#skills">Kunskaper</a></li>
+          <li>
+            <a href="index.html#projects">Projekt</a>
+            <ul>
+              <li>
+                <a href="subslayer.html" aria-current="page">SubSlayer</a>
+                <ul>
+                  <li><a href="#features">Funktioner</a></li>
+                  <li><a href="#tech">Teknik</a></li>
+                  <li><a href="#structure">Struktur</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="index.html#interests">Fritid</a></li>
+          <li><a href="index.html#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <h1>SubSlayer</h1>
+        <p class="lead">
+          En webbapp för att hålla koll på prenumerationer. Jag byggde den med PHP,
+          JavaScript och MySQL/MariaDB, från inloggning och databas till API,
+          valutaomvandling och automatiska påminnelser.
+        </p>
+        <p class="actions">
+          <a class="btn btn-primary" href="https://github.com/Alvin-Sandgren/SubSlayer">Koden på GitHub</a>
+          <a class="btn btn-secondary" href="index.html#projects">Tillbaka till projekt</a>
+        </p>
+      </section>
+
+      <section class="reveal" id="about">
+        <h2>Om projektet</h2>
+        <p>
+          Användare registrerar sig, loggar in och lägger till sina prenumerationer
+          med kostnad, valuta, betalningsperiod och nästa förfallodatum. Appen räknar
+          ut årskostnaden, växlar mellan valutor och visar hur stor del av lönen som
+          går till prenumerationer.
+        </p>
+        <p>
+          Projektet består av cirka 1 900 rader egen kod i PHP, JavaScript och CSS.
+        </p>
+      </section>
+
+      <section class="reveal" id="features">
+        <h2>Funktioner</h2>
+        <dl class="features">
+          <dt>Konto och inloggning</dt>
+          <dd>
+            Registrering med e-post och lösenord. Lösenorden hashas med
+            <code>password_hash</code> och sessioner styr vad en inloggad användare får se.
+          </dd>
+
+          <dt>Prenumerationer</dt>
+          <dd>
+            Lägg till, ändra och ta bort prenumerationer. Kostnad och valuta kan
+            redigeras direkt i tabellen, och de tre nästa förfallodatumen visas med
+            antal dagar kvar.
+          </dd>
+
+          <dt>REST-API</dt>
+          <dd>
+            <code>backend/api.php</code> kontrollerar sessionen och svarar med JSON via
+            GET, POST, PUT och DELETE. En prenumeration kan bara tas bort av sin ägare.
+          </dd>
+
+          <dt>Valutaomvandling</dt>
+          <dd>
+            Kurser hämtas från Frankfurter API med SEK som bas, så att prenumerationer
+            i andra valutor räknas om och går att jämföra.
+          </dd>
+
+          <dt>Jämförelse mot lönen</dt>
+          <dd>
+            Användaren sparar sin månadslön och ser hur stor andel av årslönen som går
+            till prenumerationer. Ett cirkeldiagram byggt med Chart.js visar
+            kostnadsfördelningen per tjänst.
+          </dd>
+
+          <dt>E-postpåminnelser</dt>
+          <dd>
+            <code>notifier.php</code> skickar påminnelser med PHPMailer för betalningar
+            som förfaller inom sju dagar. Skriptet körs en gång per dygn via Windows
+            Schemaläggare, loggar till <code>cron_log.txt</code>, och under utveckling
+            fångar Mailpit mejlen lokalt.
+          </dd>
+
+          <dt>Wall of Shame</dt>
+          <dd>
+            Ett publikt API, <code>global-stats.php</code>, listar de tio dyraste
+            prenumerationerna omräknade till SEK och normaliserade till månadskostnad.
+            Startsidan hämtar listan med JavaScript.
+          </dd>
+        </dl>
+      </section>
+
+      <section class="reveal" id="tech">
+        <h2>Teknik</h2>
+        <ul class="tags">
+          <li>PHP 8</li>
+          <li>JavaScript (ES-moduler)</li>
+          <li>MySQL / MariaDB</li>
+          <li>Composer</li>
+          <li>PHPMailer</li>
+          <li>Chart.js</li>
+          <li>Frankfurter API</li>
+          <li>Mailpit</li>
+          <li>Laragon / XAMPP</li>
+          <li>Git och GitHub</li>
+        </ul>
+      </section>
+
+      <section class="reveal" id="structure">
+        <h2>Struktur</h2>
+        <p>
+          Backend och frontend är separerade: PHP ligger i <code>backend/</code> och
+          JavaScriptet är uppdelat i moduler i <code>frontend/js/</code>. Databasuppgifterna
+          ligger i en <code>conf.ini</code> utanför projektmappen, så att känslig data
+          inte hamnar i källkoden.
+        </p>
+        <pre class="filetree">SubSlayer/
+├─ index.html
+├─ backend/
+│  ├─ api.php, login.php, register.php, logout.php
+│  ├─ subslayer.php, salary.php, global-stats.php
+│  └─ notifier.php
+├─ frontend/
+│  ├─ css/style.css
+│  └─ js/main.js, api.js, currencies.js, render.js, salary.js
+├─ composer/
+└─ db/SubSlayer.sql</pre>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Alvin Sandgren</p>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>
